@@ -5,32 +5,46 @@ Instalador del Framework PXP
 
 * Primero instalamos fabric para ejecutar el instalador ya que no viene por defecto en centos
 
-```yum install gcc python-devel python-setuptools -y```
+```sh
+yum install gcc python-devel python-setuptools -y
+```
 
-```easy_install pip```
+```sh
+easy_install pip
+```
 
-```pip install fabric paramiko==1.10```
+```sh
+ip install fabric paramiko==1.10
+```
 
 
 * Luego ejecutamos en la carpeta donde se encuentra el instalador
 
-```fab instalar_pxp```
+```sh 
+fab instalar_pxp
+```
 
 * Nos pedira la ip de la maquina a la cual instalar y su contrasena
 
 * Ejecutamos la recuperacion de la base de datos entramos a 
 
-```cd var/www/html/kerp/pxp/utilidades/restaurar_bd```
+```sh 
+cd var/www/html/kerp/pxp/utilidades/restaurar_bd
+```
 
 y ahi dentro ejecutar 
 
-```su postgres -```
+```sh 
+su postgres -
+```
 
 luego
 
+```sh
+./restaurar_todo.py
+```
 
-
-TODOS
+TODO'S
 -------
 
 * Realizar configuraciones necesarias para logs y manejo de bitacoras
