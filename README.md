@@ -12,6 +12,11 @@ yum install gcc python-devel python-setuptools -y
 ```sh
 easy_install pip
 ```
+Anadir 
+
+```sh
+--proxy="user:password@server:port"
+```
 
 ```sh
 pip install fabric paramiko==1.10
