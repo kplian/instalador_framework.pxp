@@ -3,13 +3,13 @@
 
 # yum install gcc python-devel python-setuptools -y
 # easy_install pip
-# pip install fabric paramiko
+# pip install fabric paramiko==1.10
 
 2.-luego ejecutamos
 
 #fab instalar_pxp
 
-3.-nos pedira la ip de la maquina a la cual instalar y su contraseña
+3.-nos pedira la ip de la maquina a la cual instalar y su contraseï¿½a
 
 4.- ejecutamos la recuperacion de la base de datos entramos a 
 
