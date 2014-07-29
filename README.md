@@ -16,8 +16,13 @@ easy_install pip
 ```sh
 pip install fabric paramiko==1.10
 ```
+Anadir 
 
+```sh
+--proxy=http://172.17.45.12:8080
+```
 
+si se esta detras de un proxy
 * Luego ejecutamos en la carpeta donde se encuentra el instalador
 
 ```sh 
