@@ -28,7 +28,6 @@ y ahi dentro ejecutar
 
 luego
 
-``` ./restaurar_todo.py```
 
 
 TODOS
