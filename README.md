@@ -49,3 +49,4 @@ TODO'S
 
 * Realizar configuraciones necesarias para logs y manejo de bitacoras
 * Realizar la restauración de base de datos de manera completa
+* Preguntar si es necesario conectarse con proxy y los datos del proxy para hacer el clone
