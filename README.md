@@ -14,7 +14,7 @@ easy_install pip
 ```
 
 ```sh
-ip install fabric paramiko==1.10
+pip install fabric paramiko==1.10
 ```
 
 
