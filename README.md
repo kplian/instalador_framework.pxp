@@ -30,7 +30,9 @@ luego
 
 ```./restaurar_todo.py```
 
+
 TODOS
 -------
+
 * Realizar configuraciones necesarias para logs y manejo de bitacoras
 * Realizar la restauración de base de datos de manera completa
