@@ -6,8 +6,11 @@ Instalador del Framework PXP
 1) primero instalamos fabric para ejecutar el instalador ya que no viene por defecto en centos
 
 ```yum install gcc python-devel python-setuptools -y```
+
 ```easy_install pip```
+
 ```pip install fabric paramiko==1.10```
+
 
 2) luego ejecutamos en la carpeta donde se encuentra el instalador
 
