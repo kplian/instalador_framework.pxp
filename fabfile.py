@@ -87,7 +87,7 @@ def instalar_pxp():
 		run("git config --global http.proxy http://" + proxy)
 		run("git config --global http.proxy https://" + proxy)
 		
-	run("git clone https://github.com/kplian/pxp.git")
+	run("git clone https://github.com/kplian/pxp.git /var/www/html/kerp")
 	run("chown -R apache.apache /var/www/html/kerp/")
 	run("chmod 700 -R /var/www/html/kerp/")
 
