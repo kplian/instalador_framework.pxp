@@ -65,6 +65,9 @@ luego
 TODO'S
 -------
 
+* Habilitar conexion con iptables corriendo
+* Habilitar contexto de selinux
+* Buscar solucion a herencia de usuario dbkerp_admin ya que no hereda el permiso de superusuario
 * Realizar configuraciones necesarias para logs y manejo de bitacoras
 * Realizar la restauración de base de datos de manera completa
 * Realizar los cambios necesarios para instalar en dos servidores separados (web y bd)
