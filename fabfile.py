@@ -81,13 +81,14 @@ def instalar_pxp():
 # instalacion de git para poder bajar el repositoriio pxp y moviendo a la carpeta /var/www/html/kerp/#
 	sudo("yum -y install git-core")
 	run("mkdir /var/www/html/kerp")
-	run("cd  /var/www/html/kerp")
+	run("mkdir /var/www/html/kerp/pxp")
+		
 	#Si existe proxy se configura github para el proxy
 	if (proxy != ""):
 		run("git config --global http.proxy http://" + proxy)
 		run("git config --global http.proxy https://" + proxy)
 		
-	run("git clone https://github.com/kplian/pxp.git /var/www/html/kerp")
+	run("git clone https://github.com/kplian/pxp.git /var/www/html/kerp/pxp")
 	run("chown -R apache.apache /var/www/html/kerp/")
 	run("chmod 700 -R /var/www/html/kerp/")
 
