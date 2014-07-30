@@ -19,7 +19,7 @@ Anadir
 ```
 
 ```sh
-pip install fabric paramiko==1.10
+pip install fabric paramiko==1.10 fexpect
 ```
 Anadir 
 
