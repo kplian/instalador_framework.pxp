@@ -62,6 +62,13 @@ luego
 ./restaurar_todo.py
 ```
 
+POST INSTALACION
+-----------------
+
+* Habilitar contexto selinux entre apache y postgres
+* Habilitar reglas para iptables
+* Dar permisos de superusuario al rol dbkerp_admin (Temporalmente)
+
 TODO'S
 -------
 
