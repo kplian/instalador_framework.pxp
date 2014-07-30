@@ -12,7 +12,7 @@ yum install gcc python-devel python-setuptools -y
 ```sh
 easy_install pip
 ```
-Anadir 
+Anadir (si la conexion es por proxy) :
 
 ```sh
 --proxy="user:password@server:port"
@@ -21,13 +21,12 @@ Anadir
 ```sh
 pip install fabric paramiko==1.10 fexpect
 ```
-Anadir 
+Anadir (si la conexion es por proxy) :
 
 ```sh
 --proxy=http://172.17.45.12:8080
 ```
 
-si se esta detras de un proxy
 * Luego ejecutamos en la carpeta donde se encuentra el instalador
 
 ```sh 
