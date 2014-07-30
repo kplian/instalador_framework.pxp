@@ -1,9 +1,16 @@
-from fabric.api import env, run, sudo
-
+from fabric.api import env
+import sys
+from ilogue.fexpect import expect, expecting, run , sudo
 
 def instalar_pxp():
 
-	
+	question = raw_input("La conexion se realizara por un proxy? (s/n) : ")
+	if question == 's' :
+		question = raw_input("Ingrese la cadena de conexion del servidor proxy  (proxyuser:proxypwd@server:port o server:port) : ")
+		proxy = question
+	else :
+		proxy = ""
+		
 	run("yum -y install wget")
 # postgres de  rpm de postgres 9.33# 
 	run("wget http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-1.noarch.rpm")
@@ -75,6 +82,11 @@ def instalar_pxp():
 	sudo("yum -y install git-core")
 	run("mkdir /var/www/html/kerp")
 	run("cd  /var/www/html/kerp")
+	#Si existe proxy se configura github para el proxy
+	if (proxy != ""):
+		run("git config --global http.proxy http://" + proxy)
+		run("git config --global http.proxy https://" + proxy)
+		
 	run("git clone https://github.com/kplian/pxp.git")
 	run("chown -R apache.apache /var/www/html/kerp/")
 	run("chmod 700 -R /var/www/html/kerp/")
@@ -125,9 +137,19 @@ def instalar_pxp():
 	
 	sudo("chcon -Rv --type=httpd_sys_content_t /var/www/html/kerp/")
 	
+	prompts = []
+	prompts += expect('Ingrese una opcion.*','1')
+	prompts += expect('Ingrese el nombre de la BD.*','dbkerp')	
+	prompts += expect('Desea obtener un backup de la BD.*','NO')
+	prompts += expect('los datos de prueba.*','n')	
 	
+	with expecting(prompts):
+		sudo("/var/www/html/kerp/pxp/utilidades/restaurar_bd/./restaurar_todo.py" , user="postgres")
+    	
+def prueba_local():
+	prompts = []
+	prompts += expect('is your.*','Jaime')
+	prompts += expect('you at stack.*','si')			
 	
-
-
-
-
+	with expecting(prompts):
+		run("python /root/prueba_local.py")
