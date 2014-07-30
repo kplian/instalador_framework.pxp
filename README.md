@@ -3,6 +3,15 @@ Instalador del Framework PXP
 
 (Este Manual ha sido probado con CENTOS 6.3 y 6.5 version MINIMAL) 
 
+Requisitos
+-----------
+
+* Configuracion de red y acceso a internet
+* En caso se ser necesario los comandos yum y wget deben estar configurados para utilizar proxy
+
+Instalacion
+------------
+
 * Primero instalamos fabric para ejecutar el instalador ya que no viene por defecto en centos
 
 ```sh
