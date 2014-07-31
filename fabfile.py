@@ -75,7 +75,7 @@ def instalar_pxp():
 	sudo('psql -c "CREATE USER dbkerp_conexion WITH PASSWORD \'dbkerp_conexion\';"', user='postgres')
 	sudo('psql -c "ALTER ROLE dbkerp_conexion SUPERUSER;"', user='postgres')
 	sudo('psql -c "CREATE USER dbkerp_admin WITH PASSWORD \'a1a69c4e834c5aa6cce8c6eceee84295\';"', user='postgres')
-	sudo('psql -c "CREATE ROLE rol_usuario_dbkerp SUPERUSER NOINHERIT ROLE dbkerp_admin;"', user='postgres')
+	sudo('psql -c "ALTER ROLE dbkerp_admin SUPERUSER;"', user='postgres')
 	run('service postgresql-9.3 restart')
 
 # instalacion de git para poder bajar el repositoriio pxp y moviendo a la carpeta /var/www/html/kerp/#
@@ -137,6 +137,9 @@ def instalar_pxp():
 	sudo("setfacl -R -m u:postgres:wrx /var/www/html")
 	
 	sudo("chcon -Rv --type=httpd_sys_content_t /var/www/html/kerp/")
+	sudo("setsebool -P httpd_can_network_connect_db=1")
+	run("chkconfig iptables off")
+	run("service iptables stop")
 	
 	prompts = []
 	prompts += expect('Ingrese una opcion.*','1')
