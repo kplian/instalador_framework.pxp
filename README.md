@@ -62,20 +62,13 @@ luego
 ./restaurar_todo.py
 ```
 
-POST INSTALACION
------------------
-
-* Habilitar contexto selinux entre apache y postgres
-* Habilitar reglas para iptables
-* Dar permisos de superusuario al rol dbkerp_admin (Temporalmente)
 
 TODO'S
 -------
 
-* Habilitar conexion con iptables corriendo
-* Habilitar contexto de selinux
-* Buscar solucion a herencia de usuario dbkerp_admin ya que no hereda el permiso de superusuario
+* Habilitar conexion con iptables corriendo (Temporalmente el instalador inactiva iptables)
+* Buscar solucion a herencia de usuario dbkerp_admin (Temporalmente el instalador le da permiso de superusuario)
 * Realizar configuraciones necesarias para logs y manejo de bitacoras
-* Realizar la restauración de base de datos de manera completa
 * Realizar los cambios necesarios para instalar en dos servidores separados (web y bd)
 * Instalar las librerias necesarias para el modulo mcrypt (REST)
+* Revisar los permisos de usuario apache y postgres sobre las carpetas del framework
