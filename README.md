@@ -78,3 +78,4 @@ TODO'S
 * Realizar configuraciones necesarias para logs y manejo de bitacoras
 * Realizar la restauración de base de datos de manera completa
 * Realizar los cambios necesarios para instalar en dos servidores separados (web y bd)
+* Instalar las librerias necesarias para el modulo mcrypt (REST)
