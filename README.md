@@ -72,3 +72,5 @@ TODO'S
 * Realizar los cambios necesarios para instalar en dos servidores separados (web y bd)
 * Instalar las librerias necesarias para el modulo mcrypt (REST)
 * Revisar los permisos de usuario apache y postgres sobre las carpetas del framework
+* Que el instaador pregunte el nombre del sistema y base de datos
+* Una ves instaladas todas las depedencias, es necesario un utilitario para agregar nuevas instancias de sistemas con su propia base de datos,   algo como un SDK
