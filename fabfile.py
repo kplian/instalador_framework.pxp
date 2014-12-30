@@ -86,7 +86,7 @@ def instalar_pxp():
 	#Si existe proxy se configura github para el proxy
 	if (proxy != ""):
 		run("git config --global http.proxy http://" + proxy)
-		run("git config --global http.proxy https://" + proxy)
+		run("git config --global https.proxy https://" + proxy)
 		
 	run("git clone https://github.com/kplian/pxp.git /var/www/html/kerp/pxp")
 	run("chown -R apache.apache /var/www/html/kerp/")
