@@ -17,14 +17,16 @@ Instalacion
 ```sh
 yum install gcc python-devel python-setuptools -y
 ```
+Si la conexion es por proxy hacer:
 
 ```sh
-easy_install pip
+export http_proxy=http://1.1.1.1:8080
+export https_proxy=https://1.1.1.1:8080
 ```
-Anadir (si la conexion es por proxy) :
+Luego instalar easy_install
 
 ```sh
---proxy="user:password@server:port"
+sudo -E easy_install pip
 ```
 
 ```sh
@@ -33,7 +35,7 @@ pip install fabric paramiko==1.10 fexpect
 Anadir (si la conexion es por proxy) :
 
 ```sh
---proxy=http://172.17.45.12:8080
+--proxy=http://1.1.1.1:8080
 ```
 
 * Luego ejecutamos en la carpeta donde se encuentra el instalador
