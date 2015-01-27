@@ -69,6 +69,7 @@ TODO'S
 -------
 
 * Habilitar conexion con iptables corriendo (Temporalmente el instalador inactiva iptables)
+* Cambiar el formato de fechas a dmy para postgres
 * Buscar solucion a herencia de usuario dbkerp_admin (Temporalmente el instalador le da permiso de superusuario)
 * Realizar configuraciones necesarias para logs y manejo de bitacoras
 * Realizar los cambios necesarios para instalar en dos servidores separados (web y bd)
