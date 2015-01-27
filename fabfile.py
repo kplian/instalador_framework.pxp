@@ -42,7 +42,49 @@ def instalar_pxp():
 	run("service httpd start")
 	run("chkconfig httpd on")
 
+#Creacion de archivos para bitacoras
+	archi = open("/usr/local/lib/phx.c",'w')
+	archi.write('#include "postgres.h"\n')
+	archi.write('#include <string.h>\n')
+	archi.write('#include "fmgr.h"\n')
+	archi.write('#include "utils/geo_decls.h"\n')
+	archi.write('#include <stdio.h>\n')
+	
+	archi.write('#ifdef PG_MODULE_MAGIC\n')
+	archi.write('PG_MODULE_MAGIC;\n')
+	archi.write('#endif\n')
+	archi.write('/* by value */\n')
+	archi.write('PG_FUNCTION_INFO_V1(monitor_phx);\n')
+	
+	archi.write('Datum\n')
+	archi.write('monitor_phx(PG_FUNCTION_ARGS)\n')
+	archi.write('{\n')
+	archi.write('    int32   arg = PG_GETARG_INT32(0);\n')
+	archi.write('    system("sudo /usr/local/lib/./phxbd.sh");\n')
+	archi.write('        PG_RETURN_INT32(arg);\n')
+	archi.write('}')
+	archi.close()
+	
+	run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -fpic -c /usr/local/lib/phx.c")
+	run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -shared -o phx.so phx.o")
+	
+	run("chown root.postgres /usr/local/lib/phx.so")
+	run("chmod 750 /usr/local/lib/phx.so")
+	
+	archi = open("/usr/local/lib/phxbd.sh",'w')
+	archi.write('!/bin/bash\n')
+	archi.write('top -b -n 1 | grep -e postgres -e httpd | awk \'{print $1","$12","$2","$9","$10","$5""""}\' > /tmp/procesos.csv\n')
+	archi.write('chown root.postgres /tmp/procesos.csv\n')
+	archi.write('chmod 740 /tmp/procesos.csv')
+	
+	sudo("chown root.postgres /usr/local/lib/phxbd.sh")
+	sudo("sudo chmod 700 /usr/local/lib/phxbd.sh")
 
+	
+	
+	
+	
+	
 # cambio de los archivos pg_hba y postgres.config#
 	archi=open("/var/lib/pgsql/9.3/data/pg_hba.conf",'w')
 	archi.write("# TYPE  DATABASE        USER            ADDRESS                 METHOD\n\n")
