@@ -65,9 +65,9 @@ def instalar_pxp():
 	archi.write('}')
 	archi.close()
 	'''
-	run("cd /usr/local/lib")
+	
 	run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -fpic -c /usr/local/lib/phx.c")
-	run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -shared -o phx.so phx.o")
+	run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -shared -o /usr/local/lib/phx.so phx.o")
 	
 	run("chown root.postgres /usr/local/lib/phx.so")
 	run("chmod 750 /usr/local/lib/phx.so")
