@@ -59,6 +59,7 @@ def instalar_pxp():
 	f = open("/var/lib/pgsql/9.3/data/postgresql.conf",'r')
 	chain = f.read()
 	chain = chain.replace("pg_catalog.english","pg_catalog.spanish")
+	chain = chain.replace("iso, mdy","iso, dmy")
 	f.close()
 	otro = open("/var/lib/pgsql/9.3/data/postgresql.conf",'w')
 	otro.write(chain)
