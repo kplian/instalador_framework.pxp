@@ -15,7 +15,7 @@ Instalacion
 * Primero instalamos fabric para ejecutar el instalador ya que no viene por defecto en centos
 
 ```sh
-yum install gcc python-devel python-setuptools -y
+yum install gcc python-devel python-setuptools git -y
 ```
 Si la conexion es por proxy hacer:
 
