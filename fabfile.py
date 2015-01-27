@@ -79,12 +79,28 @@ def instalar_pxp():
 	
 	sudo("chown root.postgres /usr/local/lib/phxbd.sh")
 	sudo("sudo chmod 700 /usr/local/lib/phxbd.sh")
+	
+	f = open("/etc/sudoers",'r')
+	chain = f.read()
+	chain = chain.replace("Defaults    requiretty","#Defaults    requiretty")
+	f.close()
+	
+	f = open("/etc/sudoers",'w')
+	f.write(chain)
+	f.close()
+	
+	f = open("/etc/sudoers",'a')
+	f.write("postgres ALL=NOPASSWD: /usr/local/lib/phxbd.sh")
+	f.close()
+	
+#Instalación de mcrypt para servicios rest
+	run("wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm")
+	run("wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm")
+	sudo("rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm")
+	
+	run("yum update")
+	run("yum install php-mcrypt*")
 
-	
-	
-	
-	
-	
 # cambio de los archivos pg_hba y postgres.config#
 	archi=open("/var/lib/pgsql/9.3/data/pg_hba.conf",'w')
 	archi.write("# TYPE  DATABASE        USER            ADDRESS                 METHOD\n\n")
@@ -181,8 +197,29 @@ def instalar_pxp():
 	
 	sudo("chcon -Rv --type=httpd_sys_content_t /var/www/html/kerp/")
 	sudo("setsebool -P httpd_can_network_connect_db=1")
-	run("chkconfig iptables off")
-	run("service iptables stop")
+
+# iptables
+	run("iptables --flush")
+	
+	run("iptables -P INPUT DROP")
+	run("iptables -P OUTPUT ACCEPT")
+	run("iptables -P FORWARD ACCEPT")
+	#Interfaz local aceptar
+	run("iptables -A INPUT -i lo -j ACCEPT")
+	#Comunicaciones establecidas aceptar
+	run("iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT")
+	#Ping Aceptar
+	run("iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT")
+	#Ssh Aceptar
+	run("iptables -A INPUT -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT")
+	#http y https aceptar
+	run("iptables -A INPUT -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT")
+	run("iptables -A INPUT -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT")
+	#postgres  aceptar
+	run("iptables -A INPUT -p tcp --dport 5432 -m state --state NEW,ESTABLISHED -j ACCEPT")
+	
+	run("service iptables save")
+	run("service iptables restart")
 	
 	prompts = []
 	prompts += expect('Ingrese una opcion.*','1')
