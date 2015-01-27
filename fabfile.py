@@ -64,7 +64,7 @@ def instalar_pxp():
 	archi.write('        PG_RETURN_INT32(arg);\n')
 	archi.write('}')
 	archi.close()
-	'''
+	
 	
 	run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -fpic -c /usr/local/lib/phx.c")
 	run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -shared -o /usr/local/lib/phx.so phx.o")
@@ -93,7 +93,7 @@ def instalar_pxp():
 	f = open("/etc/sudoers",'a')
 	f.write("postgres ALL=NOPASSWD: /usr/local/lib/phxbd.sh")
 	f.close()
-	
+	'''
 #Instalacion de mcrypt para servicios rest
 	run("wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm")
 	run("wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm")
