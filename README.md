@@ -64,15 +64,18 @@ luego
 ./restaurar_todo.py
 ```
 
+NOTAS
+-------
+* El puerto 22 (ssh) queda abierto para cualquier conexion
+* El puerto 5432 (postgres) queda abierto para cualquier conexion
+* El protocolo icmp (ping) queda abierto para cualquier conexion
+
 
 TODO'S
 -------
 
-* Habilitar conexion con iptables corriendo (Solo habilitar puertos de postgres, http, https, ssh, y el forward)
 * Buscar solucion a herencia de usuario dbkerp_admin (Temporalmente el instalador le da permiso de superusuario)
-* Realizar configuraciones necesarias para logs y manejo de bitacoras
 * Realizar los cambios necesarios para instalar en dos servidores separados (web y bd)
-* Instalar las librerias necesarias para el modulo mcrypt (REST)
 * Revisar los permisos de usuario apache y postgres sobre las carpetas del framework
 * Que el instaador pregunte el nombre del sistema y base de datos
 * Una ves instaladas todas las depedencias, es necesario un utilitario para agregar nuevas instancias de sistemas con su propia base de datos,   algo como un SDK
