@@ -10,7 +10,7 @@ def instalar_pxp():
 		proxy = question
 	else :
 		proxy = ""
-'''		
+	'''		
 	run("yum -y install wget")
 # postgres de  rpm de postgres 9.33# 
 	run("wget http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-1.noarch.rpm")
@@ -67,7 +67,7 @@ def instalar_pxp():
 	
 	run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -fpic -c /usr/local/lib/phx.c")
 	run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -shared -o phx.so phx.o")
-'''
+	'''
 	run("cd /usr/local/lib")
 	run("chown root.postgres /usr/local/lib/phx.so")
 	run("chmod 750 /usr/local/lib/phx.so")
