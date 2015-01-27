@@ -79,4 +79,5 @@ TODO'S
 * Revisar los permisos de usuario apache y postgres sobre las carpetas del framework
 * Que el instaador pregunte el nombre del sistema y base de datos
 * Una ves instaladas todas las depedencias, es necesario un utilitario para agregar nuevas instancias de sistemas con su propia base de datos,   algo como un SDK
-* agregar yum -y install php-xml 
+* agregar yum -y install php-xml
+* Agregar la ejecucion del cron para los logs de bd
