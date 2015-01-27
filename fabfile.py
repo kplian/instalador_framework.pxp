@@ -100,7 +100,7 @@ def instalar_pxp():
 	sudo("rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm")
 	
 	run("yum update")
-	run("yum install php-mcrypt*")
+	run("yum -y install php-mcrypt*")
 
 # cambio de los archivos pg_hba y postgres.config#
 	archi=open("/var/lib/pgsql/9.3/data/pg_hba.conf",'w')
