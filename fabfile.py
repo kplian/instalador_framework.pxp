@@ -207,7 +207,7 @@ def instalar_pxp():
 # iptables
 	run("iptables --flush")
 	
-	run("iptables -P INPUT DROP")
+	run("iptables -P INPUT ACCEPT")
 	run("iptables -P OUTPUT ACCEPT")
 	run("iptables -P FORWARD ACCEPT")
 	#Interfaz local aceptar
@@ -223,7 +223,7 @@ def instalar_pxp():
 	run("iptables -A INPUT -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT")
 	#postgres  aceptar
 	run("iptables -A INPUT -p tcp --dport 5432 -m state --state NEW,ESTABLISHED -j ACCEPT")
-	
+	run("iptables -P INPUT DROP")
 	run("service iptables save")
 	run("service iptables restart")
 	
