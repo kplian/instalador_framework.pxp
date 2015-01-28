@@ -10,7 +10,7 @@ def instalar_pxp():
 		proxy = question
 	else :
 		proxy = ""
-	'''		
+			
 	run("yum -y install wget")
 # postgres de  rpm de postgres 9.33# 
 	run("wget http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-1.noarch.rpm")
@@ -84,16 +84,15 @@ def instalar_pxp():
 	f = open("/etc/sudoers",'r')
 	chain = f.read()
 	chain = chain.replace("Defaults    requiretty","#Defaults    requiretty")
+	chain = chain.replace("root    ALL=(ALL)       ALL","root    ALL=(ALL)       ALL\n postgres        ALL=NOPASSWD: /usr/local/lib/phxbd.sh")
 	f.close()
 	
 	f = open("/etc/sudoers",'w')
 	f.write(chain)
 	f.close()
 	
-	f = open("/etc/sudoers",'a')
-	f.write("postgres ALL=NOPASSWD: /usr/local/lib/phxbd.sh")
-	f.close()
-	'''
+	
+	
 #Instalacion de mcrypt para servicios rest
 	run("wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm")
 	run("wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm")
