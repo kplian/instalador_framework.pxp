@@ -1,7 +1,7 @@
 Instalador del Framework PXP
 ===============================
 
-(Este Manual ha sido probado con CENTOS 6.3 y 6.5 version MINIMAL) 
+(Este Manual ha sido probado con CENTOS 6.3, 6.5 y 6.6 version MINIMAL) 
 
 Requisitos
 -----------
