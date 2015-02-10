@@ -54,7 +54,7 @@ Una vez que termine su trabajo entramos desde un navegador a la ip del servidor
 
 http://192.162.XX.XXX/kerp   
 
-y nos logueamos con el usuario admin passwor admin
+y nos logueamos con el usuario: admin  y el  password:  admin
 
 * Nos pedira la ip de la maquina a la cual instalar y su contrasena
 
