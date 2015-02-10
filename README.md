@@ -17,13 +17,13 @@ Instalacion
 ```sh
 yum install gcc python-devel python-setuptools git -y
 ```
-Si la conexion es por proxy hacer:
+* Si la conexion es por proxy hacer:
 
 ```sh
 export http_proxy=http://1.1.1.1:8080
 export https_proxy=https://1.1.1.1:8080
 ```
-Luego instalar easy_install
+* Luego instalar easy_install
 
 ```sh
 sudo -E easy_install pip
@@ -32,7 +32,7 @@ sudo -E easy_install pip
 ```sh
 pip install fabric paramiko==1.10 fexpect
 ```
-Anadir (si la conexion es por proxy) :
+Anadir (solo si la conexion es por proxy) :
 
 ```sh
 --proxy=http://1.1.1.1:8080
@@ -49,6 +49,11 @@ git clone https://github.com/kplian/instalador_framework.pxp.git
 fab instalar_pxp
 ```
 
+
+
+* Nos pedira la ip de la maquina a la cual instalar y su contrasena
+
+
 Esto nos instalara todas las dependecias del framework (Postgres, php, apache, etc, etc ...)
 
 Una vez que termine su trabajo entramos desde un navegador a la ip del servidor 
@@ -56,8 +61,6 @@ Una vez que termine su trabajo entramos desde un navegador a la ip del servidor
 http://192.162.XX.XXX/kerp   
 
 y nos logueamos con el usuario: admin  y el  password:  admin
-
-* Nos pedira la ip de la maquina a la cual instalar y su contrasena
 
 
 Para retaurar la base de datos a partir de los scrip ya sea parcialmente  (sin modificar datos de tabla) o totalmente eliminado la base y volviendola a crear usamos la siguiente utilidad
