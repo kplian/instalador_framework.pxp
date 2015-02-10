@@ -38,7 +38,11 @@ Anadir (si la conexion es por proxy) :
 --proxy=http://1.1.1.1:8080
 ```
 
-* Luego ejecutamos en la carpeta donde se encuentra el instalador
+* Clonamos este repositorio
+
+git clone https://github.com/kplian/instalador_framework.pxp.git
+
+*Luego ejecutamos en la carpeta donde se encuentra el instalador
 
 ```sh 
 fab instalar_pxp
