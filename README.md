@@ -6,8 +6,9 @@ Instalador del Framework PXP
 Requisitos
 -----------
 
-* Configuracion de red y acceso a internet
-* En caso se ser necesario los comandos yum y wget deben estar configurados para utilizar proxy
+* Configuracion de red y acceso a internet 
+* El comando sudo debe esta instalado, verificamos que algunas versiones de Centos 6.3 no lo tienen en la version minimal 
+* En caso se ser necesario los comandos  yum y wget deben estar configurados para utilizar proxy
 
 Instalacion
 ------------
@@ -43,7 +44,7 @@ Anadir (solo si la conexion es por proxy) :
 ```sh
 git clone https://github.com/kplian/instalador_framework.pxp.git
 ```
-* Luego ejecutamos en la carpeta donde se encuentra el instalador
+* Luego ejecutamos en la carpeta donde se encuentra el instalador  (dentro de la carpeta que se acaba de clonar)
 
 ```sh 
 fab instalar_pxp
