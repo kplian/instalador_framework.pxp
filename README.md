@@ -97,7 +97,7 @@ NOTAS
 TODO'S
 -------
 
-* Buscar solucion a herencia de usuario dbkerp_admin (Temporalmente el instalador le da permiso de superusuario)
+* Buscar solucion a herencia de usuario dbkerp_admin
 * Realizar los cambios necesarios para instalar en dos servidores separados (web y bd)
 * Revisar los permisos de usuario apache y postgres sobre las carpetas del framework
 * Que el instaador pregunte el nombre del sistema y base de datos
