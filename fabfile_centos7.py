@@ -2,7 +2,7 @@ from fabric.api import env
 import sys
 from ilogue.fexpect import expect, expecting, run , sudo
 
-def instalar_pxp():
+def instalar_pxp_centos_7():
 
 	question = raw_input("La conexion se realizara por un proxy? (s/n) : ")
 	if question == 's' :
