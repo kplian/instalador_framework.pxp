@@ -93,11 +93,14 @@ def instalar_pxp_centos_7():
 	
 	
 #Instalacion de mcrypt para servicios rest
-	run("wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm")
-	run("wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm")
-	sudo("rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm")
-	
+	#run("wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm")
+	run("wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm")
+	run("wget http://rpms.remirepo.net/enterprise/remi-release-7.rpm")
+	#run("wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm")
+	#sudo("rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm")
+	sudo("rpm -Uvh remi-release-7*.rpm epel-release-7*.rpm")
 	run("yum -y update")
+	ryn("yum clean all")
 	run("yum -y install php-mcrypt*")
 
 # cambio de los archivos pg_hba y postgres.config#
@@ -234,10 +237,3 @@ def instalar_pxp_centos_7():
 	with expecting(prompts):
 		sudo("/var/www/html/kerp/pxp/utilidades/restaurar_bd/./restaurar_todo.py" , user="postgres")
     	
-def prueba_local():
-	prompts = []
-	prompts += expect('is your.*','Jaime')
-	prompts += expect('you at stack.*','si')			
-	
-	with expecting(prompts):
-		run("python /root/prueba_local.py")
