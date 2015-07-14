@@ -98,9 +98,9 @@ def instalar_pxp_centos_7():
 	run("wget http://rpms.remirepo.net/enterprise/remi-release-7.rpm")
 	#run("wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm")
 	#sudo("rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm")
-	sudo("rpm -Uvh remi-release-7*.rpm epel-release-7*.rpm")
+	run("rpm -Uvh remi-release-7*.rpm epel-release-7*.rpm")
 	run("yum -y update")
-	ryn("yum clean all")
+	run("yum clean all")
 	run("yum -y install php-mcrypt*")
 
 # cambio de los archivos pg_hba y postgres.config#
