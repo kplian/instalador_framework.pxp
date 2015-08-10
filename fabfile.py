@@ -12,35 +12,52 @@ def instalar_pxp():
 		proxy = ""
 			
 	run("yum -y install wget")
-# postgres de  rpm de postgres 9.33# 
-	run("wget http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-1.noarch.rpm")
+		
+	version = run("grep -o release.. /etc/redhat-release")
+	
+	if(version == 'release 7'):
+		# postgres de  rpm de postgres 9.4# 
+		run("wget http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm")
+	else:
+		# postgres de  rpm de postgres 9.33# 
+		run("wget http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-1.noarch.rpm")
 
 # configuraicon de archivos de centos-base.repo agregando una linea #
 	s = open("/etc/yum.repos.d/CentOS-Base.repo",'a')
 	s.write("exclude=postgresql*\n\n")
 	s.close()
 
-
-
- 	run("rpm -U pgdg-redhat93-9.3-1.noarch.rpm")
+	if(version == 'release 7'):
+		run("rpm -U pgdg-centos94-9.4-1.noarch.rpm")
+	else:
+		run("rpm -U pgdg-redhat93-9.3-1.noarch.rpm")
 	
 # instalacion de postgres y la primera corrida #
 	S_pgsql="service postgresql-9.3"
 	I_pgsql="postgresql93"
-	sudo("yum -y install postgresql93-server postgresql93-docs postgresql93-contrib postgresql93-plperl postgresql93-plpython postgresql93-pltcl postgresql93-test rhdb-utils gcc-objc postgresql93-devel ")
-
-	run("service postgresql-9.3 initdb")
-	run("service postgresql-9.3 start")
-	run("chkconfig postgresql-9.3 on")
-
+	
+	if(version == 'release 7'):
+		sudo("yum -y install postgresql94-server postgresql94-docs postgresql94-contrib postgresql94-plperl postgresql94-plpython postgresql94-pltcl postgresql94-test rhdb-utils gcc-objc postgresql94-devel ")
+		run("/usr/pgsql-9.4/bin/postgresql94-setup initdb")
+		run("systemctl start postgresql-9.4")
+		run("systemctl enable postgresql-9.4")
+	else:
+		sudo("yum -y install postgresql93-server postgresql93-docs postgresql93-contrib postgresql93-plperl postgresql93-plpython postgresql93-pltcl postgresql93-test rhdb-utils gcc-objc postgresql93-devel ")
+		run("service postgresql-9.3 initdb")
+		run("service postgresql-9.3 start")
+		run("chkconfig postgresql-9.3 on")
 
 # instalacion del php y apache mas la primera corrida #
 
 
 	sudo("yum -y install httpd php  mod_ssl mod_auth_pgsql  php-pear php-bcmath  php-cli php-ldap php-pdo php-pgsql php-gd")
-
-	run("service httpd start")
-	run("chkconfig httpd on")
+	
+	if(version == 'release 7'):
+		run("systemctl start httpd")
+		run("systemctl enable httpd")
+	else:
+		run("service httpd start")
+		run("chkconfig httpd on")
 
 #Creacion de archivos para bitacoras
 	archi = open("/usr/local/lib/phx.c",'w')
@@ -65,9 +82,12 @@ def instalar_pxp():
 	archi.write('}')
 	archi.close()
 	
-	
-	run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -fpic -c /usr/local/lib/phx.c")
-	run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -shared -o /usr/local/lib/phx.so phx.o")
+	if(version == 'release 7'):
+		run("gcc -I /usr/local/include -I /usr/pgsql-9.4/include/server/ -fpic -c /usr/local/lib/phx.c")
+		run("gcc -I /usr/local/include -I /usr/pgsql-9.4/include/server/ -shared -o /usr/local/lib/phx.so phx.o")
+	else:
+		run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -fpic -c /usr/local/lib/phx.c")
+		run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -shared -o /usr/local/lib/phx.so phx.o")
 	
 	run("chown root.postgres /usr/local/lib/phx.so")
 	run("chmod 750 /usr/local/lib/phx.so")
@@ -94,15 +114,25 @@ def instalar_pxp():
 	
 	
 #Instalacion de mcrypt para servicios rest
-	run("wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm")
-	run("wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm")
-	sudo("rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm")
+	if(version == 'release 7'):
+		run("wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm")
+		run("wget http://rpms.remirepo.net/enterprise/remi-release-7.rpm")
+		run("rpm -Uvh remi-release-7*.rpm epel-release-7*.rpm")
+	else:
+		run("wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm")
+		run("wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm")
+		sudo("rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm")
+	
 	
 	run("yum -y update")
 	run("yum -y install php-mcrypt*")
 
 # cambio de los archivos pg_hba y postgres.config#
-	archi=open("/var/lib/pgsql/9.3/data/pg_hba.conf",'w')
+	if(version == 'release 7'):
+		archi=open("/var/lib/pgsql/9.4/data/pg_hba.conf",'w')
+	else:
+		archi=open("/var/lib/pgsql/9.3/data/pg_hba.conf",'w')
+		
 	archi.write("# TYPE  DATABASE        USER            ADDRESS                 METHOD\n\n")
 	archi.write("# 'local' is for Unix domain socket connections only\n")
 	archi.write("local   all		postgres,dbkerp_conexion                  trust\n")
@@ -114,7 +144,11 @@ def instalar_pxp():
 	archi.write("host    all             all             ::1/128                 md5\n")
 	archi.close()
 
-	f = open("/var/lib/pgsql/9.3/data/postgresql.conf",'r')
+	if(version == 'release 7'):
+		f = open("/var/lib/pgsql/9.4/data/postgresql.conf",'r')
+	else:
+		f = open("/var/lib/pgsql/9.3/data/postgresql.conf",'r')
+		
 	chain = f.read()
 	chain = chain.replace("pg_catalog.english","pg_catalog.spanish")
 	chain = chain.replace("log_destination = 'stderr'","log_destination = 'csvlog'")
@@ -124,10 +158,20 @@ def instalar_pxp():
 	chain = chain.replace("#log_statement = 'none'","log_statement = 'mod'")
 	chain = chain.replace("iso, mdy","iso, dmy")
 	f.close()
-	otro = open("/var/lib/pgsql/9.3/data/postgresql.conf",'w')
+	
+	if(version == 'release 7'):
+		otro = open("/var/lib/pgsql/9.4/data/postgresql.conf",'w')
+	else:
+		otro = open("/var/lib/pgsql/9.3/data/postgresql.conf",'w')
+		
 	otro.write(chain)
 	otro.close()
-	s = open("/var/lib/pgsql/9.3/data/postgresql.conf",'a')
+	
+	if(version == 'release 7'):
+		s = open("/var/lib/pgsql/9.4/data/postgresql.conf",'a')
+	else:
+		s = open("/var/lib/pgsql/9.3/data/postgresql.conf",'a')
+		
 	s.write("listen_addresses = '*'\n")
 	s.write("bytea_output = 'escape'\n")
 	s.close()
@@ -140,7 +184,11 @@ def instalar_pxp():
 	sudo('psql -c "ALTER ROLE dbkerp_conexion SUPERUSER;"', user='postgres')
 	sudo('psql -c "CREATE USER dbkerp_admin WITH PASSWORD \'a1a69c4e834c5aa6cce8c6eceee84295\';"', user='postgres')
 	sudo('psql -c "ALTER ROLE dbkerp_admin SUPERUSER;"', user='postgres')
-	run('service postgresql-9.3 restart')
+	
+	if(version == 'release 7'):
+		run('systemctl restart postgresql-9.4')
+	else:
+		run('service postgresql-9.3 restart')
 
 # instalacion de git para poder bajar el repositoriio pxp y moviendo a la carpeta /var/www/html/kerp/#
 	sudo("yum -y install git-core")
@@ -171,7 +219,12 @@ def instalar_pxp():
 	chain = f.read()
 	chain = chain.replace("/web/lib/lib_control/","/kerp/pxp/lib/lib_control/")
 	chain = chain.replace("/kerp-boa/","/kerp/")
-	chain = chain.replace("/var/lib/pgsql/9.1/data/pg_log/","/var/lib/pgsql/9.3/data/pg_log/")
+	
+	if(version == 'release 7'):
+		chain = chain.replace("/var/lib/pgsql/9.1/data/pg_log/","/var/lib/pgsql/9.4/data/pg_log/")
+	else:
+		chain = chain.replace("/var/lib/pgsql/9.1/data/pg_log/","/var/lib/pgsql/9.3/data/pg_log/")
+
 	f.close()
 	otro = open("/var/www/html/kerp/pxp/lib/DatosGenerales.php",'w')
 	otro.write(chain)
@@ -204,28 +257,28 @@ def instalar_pxp():
 	sudo("setsebool -P httpd_can_network_connect_db=1")
 
 # iptables
-	run("iptables --flush")
-	
-	run("iptables -P INPUT ACCEPT")
-	run("iptables -P OUTPUT ACCEPT")
-	run("iptables -P FORWARD ACCEPT")
-	#Interfaz local aceptar
-	run("iptables -A INPUT -i lo -j ACCEPT")
-	#Comunicaciones establecidas aceptar
-	run("iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT")
-	#Ping Aceptar
-	run("iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT")
-	#Ssh Aceptar
-	run("iptables -A INPUT -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT")
-	#http y https aceptar
-	run("iptables -A INPUT -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT")
-	run("iptables -A INPUT -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT")
-	#postgres  aceptar
-	run("iptables -A INPUT -p tcp --dport 5432 -m state --state NEW,ESTABLISHED -j ACCEPT")
-	run("iptables -P INPUT DROP")
-	run("service iptables save")
-	run("service iptables restart")
-	
+	if(version == 'release 6'):
+		run("iptables --flush")	
+		run("iptables -P INPUT ACCEPT")
+		run("iptables -P OUTPUT ACCEPT")
+		run("iptables -P FORWARD ACCEPT")
+		#Interfaz local aceptar
+		run("iptables -A INPUT -i lo -j ACCEPT")
+		#Comunicaciones establecidas aceptar
+		run("iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT")
+		#Ping Aceptar
+		run("iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT")
+		#Ssh Aceptar
+		run("iptables -A INPUT -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT")
+		#http y https aceptar
+		run("iptables -A INPUT -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT")
+		run("iptables -A INPUT -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT")
+		#postgres  aceptar
+		run("iptables -A INPUT -p tcp --dport 5432 -m state --state NEW,ESTABLISHED -j ACCEPT")
+		run("iptables -P INPUT DROP")
+		run("service iptables save")
+		run("service iptables restart")
+				
 	prompts = []
 	prompts += expect('Ingrese una opcion.*','1')
 	prompts += expect('Ingrese el nombre de la BD.*','dbkerp')	
