@@ -3,7 +3,7 @@ Instalador del Framework PXP
 
 Canal de youtube (https://www.youtube.com/channel/UCSk4IfCR6swJYu3zPOEiGuw)
 
-(Este Manual ha sido probado con CENTOS 6.3, 6.5 y 6.6 version MINIMAL) 
+(Este Manual ha sido probado con CENTOS 6.X y 7.X version MINIMAL) 
 
 Requisitos
 -----------
