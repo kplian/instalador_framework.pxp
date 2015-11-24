@@ -278,6 +278,11 @@ def instalar_pxp():
 		run("iptables -P INPUT DROP")
 		run("service iptables save")
 		run("service iptables restart")
+	else:
+		run("firewall-cmd --permanent --add-port=22/tcp")
+        	run("firewall-cmd --permanent --add-port=80/tcp")
+        	run("firewall-cmd --permanent --add-port=5432/tcp")
+		run("firewall-cmd --reload")
 				
 	prompts = []
 	prompts += expect('Ingrese una opcion.*','1')
