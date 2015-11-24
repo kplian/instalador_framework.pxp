@@ -202,10 +202,18 @@ def instalar_pxp_centos_7():
 	
 	sudo("setfacl -R -m u:postgres:wrx /var/www/html")
 	
-	sudo("chcon -Rv --type=httpd_sys_content_t /var/www/html/kerp/")
+	sudo("chcon -Rv --type=httpd_sys_rw_content_t /var/www/html/kerp/")
 	sudo("setsebool -P httpd_can_network_connect_db=1")
 
 # iptables
+
+        run("firewall-cmd --permanent --add-port=22/tcp")
+        run("firewall-cmd --permanent --add-port=80/tcp")
+        run("firewall-cmd --permanent --add-port=5432/tcp")
+        run("firewall-cmd --reload")
+        
+        
+        
 #	run("iptables --flush")
 	
 #	run("iptables -P INPUT ACCEPT")
