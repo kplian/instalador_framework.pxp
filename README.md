@@ -17,6 +17,12 @@ Requisitos
 Instalacion
 ------------
 
+* Cambiar al usuario root
+
+```sh 
+sudo su -
+```
+
 * Primero instalamos fabric para ejecutar el instalador ya que no viene por defecto en centos
 
 ```sh
@@ -48,7 +54,8 @@ Anadir (solo si la conexion es por proxy) :
 ```sh
 git clone https://github.com/kplian/instalador_framework.pxp.git
 ```
-* Luego ejecutamos en la carpeta donde se encuentra el instalador  (dentro de la carpeta que se acaba de clonar)
+
+* Luego ejecutamos en la carpeta donde se encuentra el instalador (dentro de la carpeta que se acaba de clonar)
 
 ```sh 
 fab instalar_pxp
