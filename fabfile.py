@@ -253,7 +253,7 @@ def instalar_pxp():
 	
 	sudo("setfacl -R -m u:postgres:wrx /var/www/html")
 	
-	sudo("chcon -Rv --type=httpd_sys_content_t /var/www/html/kerp/")
+	sudo("chcon -Rv --type=httpd_sys_rw_content_t /var/www/html/kerp/")
 	sudo("setsebool -P httpd_can_network_connect_db=1")
 
 # iptables
