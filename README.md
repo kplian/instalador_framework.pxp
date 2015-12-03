@@ -41,8 +41,11 @@ sudo -E easy_install pip
 ```
 
 ```sh
-pip install fabric paramiko==1.10 fexpect
+pip install fabric paramiko==1.10  ptyprocess==0.4  fexpect    
+
 ```
+
+
 Anadir (solo si la conexion es por proxy) :
 
 ```sh
