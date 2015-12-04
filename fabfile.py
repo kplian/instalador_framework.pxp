@@ -28,9 +28,9 @@ def instalar_pxp():
 	s.close()
 
 	if(version == 'release 7'):
-		run("rpm -U pgdg-centos94-9.4-1.noarch.rpm")
+		run("rpm -Uvh --replacepkgs pgdg-centos94-9.4-1.noarch.rpm")
 	else:
-		run("rpm -U pgdg-redhat93-9.3-1.noarch.rpm")
+		run("rpm -Uvh --replacepkgs pgdg-redhat93-9.3-1.noarch.rpm")
 	
 # instalacion de postgres y la primera corrida #
 	S_pgsql="service postgresql-9.3"
