@@ -41,7 +41,7 @@ sudo -E easy_install pip
 ```
 
 ```sh
-pip install fabric paramiko==1.10  ptyprocess==0.4  fexpect    
+pip install fabric paramiko==1.10  ptyprocess==0.4  fexpect PyCrypto==2.3
 
 ```
 
