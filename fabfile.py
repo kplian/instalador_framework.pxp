@@ -16,10 +16,10 @@ def instalar_pxp():
 	version = run("grep -o release.. /etc/redhat-release")
 	
 	if(version == 'release 7'):
-		# postgres de  rpm de postgres 9.4# 
+		# postgres de  rpm de postgres 9.5# 
 		run("wget http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm")
 	else:
-		# postgres de  rpm de postgres 9.33# 
+		# postgres de  rpm de postgres 9.5# 
 		run("wget http://yum.postgresql.org/9.5/redhat/rhel-6-x86_64/pgdg-redhat95-9.5-2.noarch.rpm")
 
 # configuraicon de archivos de centos-base.repo agregando una linea #
