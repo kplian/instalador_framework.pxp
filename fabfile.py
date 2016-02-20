@@ -20,7 +20,7 @@ def instalar_pxp():
 		run("wget http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm")
 	else:
 		# postgres de  rpm de postgres 9.33# 
-		run("wget http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-1.noarch.rpm")
+		run("wget http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-redhat94-9.3-1.noarch.rpm")
 
 # configuraicon de archivos de centos-base.repo agregando una linea #
 	s = open("/etc/yum.repos.d/CentOS-Base.repo",'a')
@@ -30,19 +30,19 @@ def instalar_pxp():
 	if(version == 'release 7'):
 		run("rpm -Uvh --replacepkgs pgdg-centos94-9.4-1.noarch.rpm")
 	else:
-		run("rpm -Uvh --replacepkgs pgdg-redhat93-9.3-1.noarch.rpm")
+		run("rpm -Uvh --replacepkgs pgdg-redhat94-9.4-1.noarch.rpm")
 	
 # instalacion de postgres y la primera corrida #
-	S_pgsql="service postgresql-9.3"
-	I_pgsql="postgresql93"
-	
+	S_pgsql="service postgresql-9.4"
+	I_pgsql="postgresql94"
+	sudo("yum -y install postgresql94-server postgresql94-docs postgresql94-contrib postgresql94-plperl postgresql94-plpython postgresql94-pltcl postgresql94-test rhdb-utils gcc-objc postgresql94-devel ")
 	if(version == 'release 7'):
-		sudo("yum -y install postgresql94-server postgresql94-docs postgresql94-contrib postgresql94-plperl postgresql94-plpython postgresql94-pltcl postgresql94-test rhdb-utils gcc-objc postgresql94-devel ")
-		run("/usr/pgsql-9.4/bin/postgresql94-setup initdb")
+		
+		run("/usr/sudo("yum -y install postgresql94-server postgresql94-docs postgresql94-contrib postgresql94-plperl postgresql94-plpython postgresql94-pltcl postgresql94-test rhdb-utils gcc-objc postgresql94-devel ")gsql-9.4/bin/postgresql94-setup initdb")
 		run("systemctl start postgresql-9.4")
 		run("systemctl enable postgresql-9.4")
 	else:
-		sudo("yum -y install postgresql93-server postgresql93-docs postgresql93-contrib postgresql93-plperl postgresql93-plpython postgresql93-pltcl postgresql93-test rhdb-utils gcc-objc postgresql93-devel ")
+		
 		run("service postgresql-9.3 initdb")
 		run("service postgresql-9.3 start")
 		run("chkconfig postgresql-9.3 on")
@@ -82,13 +82,10 @@ def instalar_pxp():
 	archi.write('}')
 	archi.close()
 	
-	if(version == 'release 7'):
-		run("gcc -I /usr/local/include -I /usr/pgsql-9.4/include/server/ -fpic -c /usr/local/lib/phx.c")
-		run("gcc -I /usr/local/include -I /usr/pgsql-9.4/include/server/ -shared -o /usr/local/lib/phx.so phx.o")
-	else:
-		run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -fpic -c /usr/local/lib/phx.c")
-		run("gcc -I /usr/local/include -I /usr/pgsql-9.3/include/server/ -shared -o /usr/local/lib/phx.so phx.o")
+	run("gcc -I /usr/local/include -I /usr/pgsql-9.4/include/server/ -fpic -c /usr/local/lib/phx.c")
+	run("gcc -I /usr/local/include -I /usr/pgsql-9.4/include/server/ -shared -o /usr/local/lib/phx.so phx.o")
 	
+
 	run("chown root.postgres /usr/local/lib/phx.so")
 	run("chmod 750 /usr/local/lib/phx.so")
 	
@@ -128,10 +125,8 @@ def instalar_pxp():
 	run("yum -y install php-mcrypt*")
 
 # cambio de los archivos pg_hba y postgres.config#
-	if(version == 'release 7'):
-		archi=open("/var/lib/pgsql/9.4/data/pg_hba.conf",'w')
-	else:
-		archi=open("/var/lib/pgsql/9.3/data/pg_hba.conf",'w')
+	
+	archi=open("/var/lib/pgsql/9.4/data/pg_hba.conf",'w')
 		
 	archi.write("# TYPE  DATABASE        USER            ADDRESS                 METHOD\n\n")
 	archi.write("# 'local' is for Unix domain socket connections only\n")
@@ -144,11 +139,9 @@ def instalar_pxp():
 	archi.write("host    all             all             ::1/128                 md5\n")
 	archi.close()
 
-	if(version == 'release 7'):
-		f = open("/var/lib/pgsql/9.4/data/postgresql.conf",'r')
-	else:
-		f = open("/var/lib/pgsql/9.3/data/postgresql.conf",'r')
-		
+	
+	f = open("/var/lib/pgsql/9.4/data/postgresql.conf",'r')
+	
 	chain = f.read()
 	chain = chain.replace("pg_catalog.english","pg_catalog.spanish")
 	chain = chain.replace("log_destination = 'stderr'","log_destination = 'csvlog'")
@@ -159,19 +152,15 @@ def instalar_pxp():
 	chain = chain.replace("iso, mdy","iso, dmy")
 	f.close()
 	
-	if(version == 'release 7'):
-		otro = open("/var/lib/pgsql/9.4/data/postgresql.conf",'w')
-	else:
-		otro = open("/var/lib/pgsql/9.3/data/postgresql.conf",'w')
+	
+	otro = open("/var/lib/pgsql/9.4/data/postgresql.conf",'w')
+	
 		
 	otro.write(chain)
 	otro.close()
 	
-	if(version == 'release 7'):
-		s = open("/var/lib/pgsql/9.4/data/postgresql.conf",'a')
-	else:
-		s = open("/var/lib/pgsql/9.3/data/postgresql.conf",'a')
-		
+	s = open("/var/lib/pgsql/9.4/data/postgresql.conf",'a')
+	
 	s.write("listen_addresses = '*'\n")
 	s.write("bytea_output = 'escape'\n")
 	s.close()
@@ -188,7 +177,7 @@ def instalar_pxp():
 	if(version == 'release 7'):
 		run('systemctl restart postgresql-9.4')
 	else:
-		run('service postgresql-9.3 restart')
+		run('service postgresql-9.4 restart')
 
 # instalacion de git para poder bajar el repositoriio pxp y moviendo a la carpeta /var/www/html/kerp/#
 	sudo("yum -y install git-core")
@@ -220,10 +209,9 @@ def instalar_pxp():
 	chain = chain.replace("/web/lib/lib_control/","/kerp/pxp/lib/lib_control/")
 	chain = chain.replace("/kerp-boa/","/kerp/")
 	
-	if(version == 'release 7'):
-		chain = chain.replace("/var/lib/pgsql/9.1/data/pg_log/","/var/lib/pgsql/9.4/data/pg_log/")
-	else:
-		chain = chain.replace("/var/lib/pgsql/9.1/data/pg_log/","/var/lib/pgsql/9.3/data/pg_log/")
+	
+	chain = chain.replace("/var/lib/pgsql/9.1/data/pg_log/","/var/lib/pgsql/9.4/data/pg_log/")
+	
 
 	f.close()
 	otro = open("/var/www/html/kerp/pxp/lib/DatosGenerales.php",'w')
