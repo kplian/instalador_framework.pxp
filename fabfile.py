@@ -50,7 +50,7 @@ def instalar_pxp():
 # instalacion del php y apache mas la primera corrida #
 
 
-	sudo("yum -y install httpd php  mod_ssl mod_auth_pgsql  php-pear php-bcmath  php-cli php-ldap php-pdo php-pgsql php-gd")
+	sudo("yum -y install httpd php  mod_ssl mod_auth_pgsql  php-pear php-bcmath  php-mbstring php-cli php-ldap php-pdo php-pgsql php-gd")
 	
 	if(version == 'release 7'):
 		run("systemctl start httpd")
