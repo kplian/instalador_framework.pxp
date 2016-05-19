@@ -112,7 +112,7 @@ def instalar_pxp():
 	
 #Instalacion de mcrypt para servicios rest
 	if(version == 'release 7'):
-		run("wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm")
+		run("wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm")
 		run("wget http://rpms.remirepo.net/enterprise/remi-release-7.rpm")
 		run("rpm -Uvh remi-release-7*.rpm epel-release-7*.rpm")
 	else:
