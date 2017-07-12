@@ -104,6 +104,7 @@ NOTAS
 * El puerto 22 (ssh) queda abierto para cualquier conexion
 * El puerto 5432 (postgres) queda abierto para cualquier conexion
 * El protocolo icmp (ping) queda abierto para cualquier conexion
+* El puerto 8081 queda abierto para la conexion de websocket (tomar en cuenta este puerto en DatosGeneraes.php si esque creas mas instancias del pxp en tu servidor)
 
 
 TODO'S
