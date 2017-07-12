@@ -277,7 +277,10 @@ def instalar_pxp():
         	run("firewall-cmd --permanent --add-port=5432/tcp")
 		run("firewall-cmd --permanent --add-port=8010/tcp")
 		run("firewall-cmd --reload")
-				
+	
+	
+	sudo("php /var/www/html/kerp/lib/ratchet/pxp-Server.php > /dev/null 2>&1 &")
+	
 	prompts = []
 	prompts += expect('Ingrese una opcion.*','1')
 	prompts += expect('Ingrese el nombre de la BD.*','dbkerp')	
