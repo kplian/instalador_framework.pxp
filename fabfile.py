@@ -243,6 +243,8 @@ def instalar_pxp():
 	
 	sudo("chcon -Rv --type=httpd_sys_rw_content_t /var/www/html/kerp/")
 	sudo("setsebool -P httpd_can_network_connect_db=1")
+	
+	sudo("setsebool -P httpd_can_network_connect 1")
 
 # iptables
 	if(version == 'release 6'):
@@ -261,6 +263,9 @@ def instalar_pxp():
 		#http y https aceptar
 		run("iptables -A INPUT -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT")
 		run("iptables -A INPUT -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT")
+		#websocket
+		run("iptables -A INPUT -p tcp --dport 8010 -m state --state NEW,ESTABLISHED -j ACCEPT")
+		
 		#postgres  aceptar
 		run("iptables -A INPUT -p tcp --dport 5432 -m state --state NEW,ESTABLISHED -j ACCEPT")
 		run("iptables -P INPUT DROP")
@@ -270,6 +275,7 @@ def instalar_pxp():
 		run("firewall-cmd --permanent --add-port=22/tcp")
         	run("firewall-cmd --permanent --add-port=80/tcp")
         	run("firewall-cmd --permanent --add-port=5432/tcp")
+		run("firewall-cmd --permanent --add-port=8010/tcp")
 		run("firewall-cmd --reload")
 				
 	prompts = []
