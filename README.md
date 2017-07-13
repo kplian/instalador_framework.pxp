@@ -104,7 +104,7 @@ NOTAS
 * El puerto 22 (ssh) queda abierto para cualquier conexion
 * El puerto 5432 (postgres) queda abierto para cualquier conexion
 * El protocolo icmp (ping) queda abierto para cualquier conexion
-* El puerto 8081 queda abierto para la conexion de websocket (tomar en cuenta este puerto en DatosGeneraes.php si esque creas mas instancias del pxp en tu servidor)
+* El puerto 8010 queda abierto para la conexion de websocket (tomar en cuenta este puerto en DatosGeneraes.php si esque creas mas instancias del pxp en tu servidor)
 
 * Si reinicias tu servidor volver a correr este comando posicionado en la ruta /var/www/html/TUPXP/lib/ratchet  
 php pxp-Server.php > /dev/null 2>&1 &
