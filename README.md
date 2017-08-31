@@ -114,7 +114,7 @@ En este momento no se cuenta con un instalador que pueda instalar el motor de ba
 ```sh
 host:*:*:usuariobd:passbd
 ```
-* Donde host es el mismo que se ha configurado en DatosGenerales.php, usuariobd y passbd son un usuario y contraseña de la base de datos con permisos para realziar las restauraciones.
+* Donde host es el mismo que se ha configurado en DatosGenerales.php, usuariobd y passbd son un usuario y contraseña de la base de datos con permisos para realizar las restauraciones.
 
 NOTAS
 -------
