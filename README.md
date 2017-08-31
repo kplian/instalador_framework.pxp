@@ -106,7 +106,7 @@ En este momento no se cuenta con un instalador que pueda instalar el motor de ba
 1. En el servidor Web, instalar pxp con el instalador y desinstalar postgres
 2. En el servidor de BD, instalar pxp con el instalador y desinstalar apache y php
 3. Para que el script de restauración (restaurar_todo.py) funcione se debe realizar lo siguiente :
-⋅⋅⋅Crear el archivo .pgpass en el home del usuario con el que se realizará la restauración. Por ejemplo si el usuario es root el archivo será /root/.pgpass. El usuario y grupo del archivo debe ser el mismo que el de la restauración y los permisos 600.
+⋅⋅*Crear el archivo .pgpass en el home del usuario con el que se realizará la restauración. Por ejemplo si el usuario es root el archivo será /root/.pgpass. El usuario y grupo del archivo debe ser el mismo que el de la restauración y los permisos 600.
 
 ⋅⋅⋅El contenido del archivo será:
 
