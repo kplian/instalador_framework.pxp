@@ -45,7 +45,7 @@ def instalar_pxp():
 	sudo("yum -y install httpd mod_ssl mod_auth_pgsql")	
 		
 # instalacion del php  #
-	sudo("yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm")
+	sudo("yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm")
 	sudo("yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm")
 	sudo("yum -y install yum-utils")
 	sudo("yum-config-manager --enable remi-php72")
