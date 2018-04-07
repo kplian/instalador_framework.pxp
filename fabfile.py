@@ -114,12 +114,8 @@ def instalar_pxp():
 	
 #Instalacion de mcrypt para servicios rest
 	
-	#run("wget http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm")
-	#run("wget http://rpms.remirepo.net/enterprise/remi-release-7.rpm")
-	#run("rpm -Uvh remi-release-7*.rpm epel-release-7*.rpm")
 	
-	#run("yum -y update")
-	#run("yum -y install php-mcrypt*")
+	run("yum -y --enablerepo=epel -y install php-mcrypt*")
 
 # cambio de los archivos pg_hba y postgres.config#
 	
@@ -171,10 +167,9 @@ def instalar_pxp():
 	sudo('psql -c "CREATE USER dbkerp_admin WITH PASSWORD \'a1a69c4e834c5aa6cce8c6eceee84295\';"', user='postgres')
 	sudo('psql -c "ALTER ROLE dbkerp_admin SUPERUSER;"', user='postgres')
 	
-	if(version == 'release 7'):
-		run('systemctl restart postgresql-10')
-	else:
-		run('service postgresql-10 restart')
+	
+	run('systemctl restart postgresql-10')
+	
 
 # instalacion de git para poder bajar el repositoriio pxp y moviendo a la carpeta /var/www/html/kerp/#
 	sudo("yum -y install git-core")
