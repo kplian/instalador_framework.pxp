@@ -37,7 +37,7 @@ def instalar_pxp():
 	I_pgsql="postgresql10"
 	sudo("yum -y install postgresql10-server postgresql10-docs postgresql10-contrib postgresql10-test rhdb-utils gcc-objc postgresql10-devel ")
 			
-	run("/usr/pgsql-10/bin/postgresql10-setup initdb")
+	run("/usr/pgsql-10/bin/postgresql-10-setup initdb")
 	run("systemctl start postgresql-10")
 	run("systemctl enable postgresql-10")
 		
