@@ -49,13 +49,14 @@ def instalar_pxp():
 	sudo("yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm")
 	sudo("yum -y install yum-utils")
 	sudo("yum-config-manager --enable remi-php72")
+	sudo("yum-config-manager --enable epel")
 	
 	
 
 
 	sudo("yum -y install php php-pear php-bcmath  php-mbstring php-cli php-ldap php-pdo php-pgsql php-gd")
 	
-	
+	sudo("yum-config-manager --disable epel")
 	run("systemctl start httpd")
 	run("systemctl enable httpd")
 	
