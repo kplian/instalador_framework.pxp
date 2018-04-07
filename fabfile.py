@@ -13,51 +13,52 @@ def instalar_pxp():
 			
 	run("yum -y install wget")
 		
-	version = run("grep -o release.. /etc/redhat-release")
+	version = run("cat /etc/redhat-release")	
 	
-	if(version == 'release 7'):
-		# postgres de  rpm de postgres 9.5# 
-		run("wget http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm")
+	if('Red Hat' in version):		
+		# postgres de  rpm de postgres 10# 
+		run("wget https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm")
 	else:
-		# postgres de  rpm de postgres 9.5# 
-		run("wget http://yum.postgresql.org/9.5/redhat/rhel-6-x86_64/pgdg-redhat95-9.5-2.noarch.rpm")
+		# postgres de  rpm de postgres 10# 
+		run("wget https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm")
 
 # configuraicon de archivos de centos-base.repo agregando una linea #
-	s = open("/etc/yum.repos.d/CentOS-Base.repo",'a')
-	s.write("exclude=postgresql*\n\n")
-	s.close()
+	#s = open("/etc/yum.repos.d/CentOS-Base.repo",'a')
+	#s.write("exclude=postgresql*\n\n")
+	#s.close() comentado porq nose para que es el exclude
 
-	if(version == 'release 7'):
-		run("rpm -Uvh --replacepkgs pgdg-centos95-9.5-2.noarch.rpm")
+	if('Red Hat' in version):
+		run("rpm -Uvh --replacepkgs pgdg-redhat10-10-2.noarch.rpm")
 	else:
-		run("rpm -Uvh --replacepkgs pgdg-redhat95-9.5-2.noarch.rpm")
+		run("rpm -Uvh --replacepkgs pgdg-centos10-10-2.noarch.rpm")
 	
 # instalacion de postgres y la primera corrida #
-	S_pgsql="service postgresql-9.5"
-	I_pgsql="postgresql95"
-	sudo("yum -y install postgresql95-server postgresql95-docs postgresql95-contrib postgresql95-plperl postgresql95-plpython postgresql95-pltcl postgresql95-test rhdb-utils gcc-objc postgresql95-devel ")
-	if(version == 'release 7'):
+	S_pgsql="service postgresql-10"
+	I_pgsql="postgresql10"
+	sudo("yum -y install postgresql10-server postgresql10-docs postgresql10-contrib postgresql10-test rhdb-utils gcc-objc postgresql10-devel ")
+			
+	run("/usr/pgsql-10/bin/postgresql10-setup initdb")
+	run("systemctl start postgresql-10")
+	run("systemctl enable postgresql-10")
 		
-		run("/usr/pgsql-9.5/bin/postgresql95-setup initdb")
-		run("systemctl start postgresql-9.5")
-		run("systemctl enable postgresql-9.5")
-	else:
+	#instalacion de apache	
+	sudo("yum -y install httpd mod_ssl mod_auth_pgsql")	
 		
-		run("service postgresql-9.5 initdb")
-		run("service postgresql-9.5 start")
-		run("chkconfig postgresql-9.5 on")
-
-# instalacion del php y apache mas la primera corrida #
-
-
-	sudo("yum -y install httpd php  mod_ssl mod_auth_pgsql  php-pear php-bcmath  php-mbstring php-cli php-ldap php-pdo php-pgsql php-gd")
+# instalacion del php  #
+	sudo("yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm")
+	sudo("yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm")
+	sudo("yum -y install yum-utils")
+	sudo("yum-config-manager --enable remi-php72")
 	
-	if(version == 'release 7'):
-		run("systemctl start httpd")
-		run("systemctl enable httpd")
-	else:
-		run("service httpd start")
-		run("chkconfig httpd on")
+	
+
+
+	sudo("yum -y install php php-pear php-bcmath  php-mbstring php-cli php-ldap php-pdo php-pgsql php-gd")
+	
+	
+	run("systemctl start httpd")
+	run("systemctl enable httpd")
+	
 
 #Creacion de archivos para bitacoras
 	archi = open("/usr/local/lib/phx.c",'w')
@@ -82,8 +83,8 @@ def instalar_pxp():
 	archi.write('}')
 	archi.close()
 	
-	run("gcc -I /usr/local/include -I /usr/pgsql-9.5/include/server/ -fpic -c /usr/local/lib/phx.c")
-	run("gcc -I /usr/local/include -I /usr/pgsql-9.5/include/server/ -shared -o /usr/local/lib/phx.so phx.o")
+	run("gcc -I /usr/local/include -I /usr/pgsql-10/include/server/ -fpic -c /usr/local/lib/phx.c")
+	run("gcc -I /usr/local/include -I /usr/pgsql-10/include/server/ -shared -o /usr/local/lib/phx.so phx.o")
 	
 
 	run("chown root.postgres /usr/local/lib/phx.so")
@@ -111,22 +112,17 @@ def instalar_pxp():
 	
 	
 #Instalacion de mcrypt para servicios rest
-	if(version == 'release 7'):
-		run("wget http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm")
-		run("wget http://rpms.remirepo.net/enterprise/remi-release-7.rpm")
-		run("rpm -Uvh remi-release-7*.rpm epel-release-7*.rpm")
-	else:
-		run("wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm")
-		run("wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm")
-		sudo("rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm")
 	
+	#run("wget http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm")
+	#run("wget http://rpms.remirepo.net/enterprise/remi-release-7.rpm")
+	#run("rpm -Uvh remi-release-7*.rpm epel-release-7*.rpm")
 	
-	run("yum -y update")
-	run("yum -y install php-mcrypt*")
+	#run("yum -y update")
+	#run("yum -y install php-mcrypt*")
 
 # cambio de los archivos pg_hba y postgres.config#
 	
-	archi=open("/var/lib/pgsql/9.5/data/pg_hba.conf",'w')
+	archi=open("/var/lib/pgsql/10/data/pg_hba.conf",'w')
 		
 	archi.write("# TYPE  DATABASE        USER            ADDRESS                 METHOD\n\n")
 	archi.write("# 'local' is for Unix domain socket connections only\n")
@@ -140,7 +136,7 @@ def instalar_pxp():
 	archi.close()
 
 	
-	f = open("/var/lib/pgsql/9.5/data/postgresql.conf",'r')
+	f = open("/var/lib/pgsql/10/data/postgresql.conf",'r')
 	
 	chain = f.read()
 	chain = chain.replace("pg_catalog.english","pg_catalog.spanish")
@@ -153,13 +149,13 @@ def instalar_pxp():
 	f.close()
 	
 	
-	otro = open("/var/lib/pgsql/9.5/data/postgresql.conf",'w')
+	otro = open("/var/lib/pgsql/10/data/postgresql.conf",'w')
 	
 		
 	otro.write(chain)
 	otro.close()
 	
-	s = open("/var/lib/pgsql/9.5/data/postgresql.conf",'a')
+	s = open("/var/lib/pgsql/10/data/postgresql.conf",'a')
 	
 	s.write("listen_addresses = '*'\n")
 	s.write("bytea_output = 'escape'\n")
@@ -175,9 +171,9 @@ def instalar_pxp():
 	sudo('psql -c "ALTER ROLE dbkerp_admin SUPERUSER;"', user='postgres')
 	
 	if(version == 'release 7'):
-		run('systemctl restart postgresql-9.5')
+		run('systemctl restart postgresql-10')
 	else:
-		run('service postgresql-9.5 restart')
+		run('service postgresql-10 restart')
 
 # instalacion de git para poder bajar el repositoriio pxp y moviendo a la carpeta /var/www/html/kerp/#
 	sudo("yum -y install git-core")
@@ -210,7 +206,7 @@ def instalar_pxp():
 	chain = chain.replace("/kerp-boa/","/kerp/")
 	
 	
-	chain = chain.replace("/var/lib/pgsql/9.1/data/pg_log/","/var/lib/pgsql/9.5/data/pg_log/")
+	chain = chain.replace("/var/lib/pgsql/9.1/data/pg_log/","/var/lib/pgsql/10/data/pg_log/")
 	
 
 	f.close()
@@ -247,36 +243,12 @@ def instalar_pxp():
 	sudo("setsebool -P httpd_can_network_connect 1")
 
 # iptables
-	if(version == 'release 6'):
-		run("iptables --flush")	
-		run("iptables -P INPUT ACCEPT")
-		run("iptables -P OUTPUT ACCEPT")
-		run("iptables -P FORWARD ACCEPT")
-		#Interfaz local aceptar
-		run("iptables -A INPUT -i lo -j ACCEPT")
-		#Comunicaciones establecidas aceptar
-		run("iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT")
-		#Ping Aceptar
-		run("iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT")
-		#Ssh Aceptar
-		run("iptables -A INPUT -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT")
-		#http y https aceptar
-		run("iptables -A INPUT -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT")
-		run("iptables -A INPUT -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT")
-		#websocket
-		run("iptables -A INPUT -p tcp --dport 8010 -m state --state NEW,ESTABLISHED -j ACCEPT")
-		
-		#postgres  aceptar
-		run("iptables -A INPUT -p tcp --dport 5432 -m state --state NEW,ESTABLISHED -j ACCEPT")
-		run("iptables -P INPUT DROP")
-		run("service iptables save")
-		run("service iptables restart")
-	else:
-		run("firewall-cmd --permanent --add-port=22/tcp")
-        	run("firewall-cmd --permanent --add-port=80/tcp")
-        	run("firewall-cmd --permanent --add-port=5432/tcp")
-		run("firewall-cmd --permanent --add-port=8010/tcp")
-		run("firewall-cmd --reload")
+	
+	run("firewall-cmd --permanent --add-port=22/tcp")
+        run("firewall-cmd --permanent --add-port=80/tcp")
+        run("firewall-cmd --permanent --add-port=5432/tcp")
+	run("firewall-cmd --permanent --add-port=8010/tcp")
+	run("firewall-cmd --reload")
 	
 	
 	sudo("php /var/www/html/kerp/lib/ratchet/pxp-Server.php > /dev/null 2>&1 &")
