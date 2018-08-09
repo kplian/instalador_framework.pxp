@@ -36,11 +36,7 @@ export https_proxy=https://1.1.1.1:8080
 ```
 * Luego instalar easy_install
 
-```sh
-sudo -E easy_install pip
-```
 
-Si no funcionas la isntalacion de pip proba de estra otra forma
 ```
 # install EPEL repository first
 $ sudo yum install epel-release
@@ -48,7 +44,9 @@ $ sudo yum install epel-release
 $ sudo yum -y install python-pip
 ```
 ```sh
-pip install fabric paramiko==1.10  ptyprocess==0.4  fexpect PyCrypto==2.3
+pip install fabric paramiko==1.10  ptyprocess==0.4  fexpect PyCrypto==2.3   --NO USAR OBSOLETO
+
+yum install fabric
 
 ```
 
