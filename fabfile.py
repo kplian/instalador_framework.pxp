@@ -281,6 +281,8 @@ def instalar_pxp():
 	
 	
 	sudo("php /var/www/html/kerp/lib/ratchet/pxp-Server.php > /dev/null 2>&1 &")
+	sudo("setfacl -R -m u:postgres:wrx /root")
+	
 	
 	prompts = []
 	prompts += expect('Ingrese una opcion.*','1')
