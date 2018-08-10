@@ -115,10 +115,11 @@ def instalar_pxp():
 		run("wget http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm")
 		run("wget http://rpms.remirepo.net/enterprise/remi-release-7.rpm")
 		run("rpm -Uvh remi-release-7*.rpm epel-release-7*.rpm")
-	else:
-		run("wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm")
-		run("wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm")
-		sudo("rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm")
+	#else:
+	#	#run("wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm")
+	#	#run("wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm")
+	#	#sudo("rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm")
+	#	#Comentaqdo pro que en los prerequisitos estamos instalado EPEL
 	
 	
 	run("yum -y update")
