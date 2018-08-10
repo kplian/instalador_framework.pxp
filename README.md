@@ -48,6 +48,8 @@ pip install fabric paramiko==1.10  ptyprocess==0.4  fexpect PyCrypto==2.3   --NO
 
 yum install fabric
 
+pip install fexpect
+
 ```
 
 
