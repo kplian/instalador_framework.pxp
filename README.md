@@ -59,7 +59,7 @@ Anadir (solo si la conexion es por proxy) :
 --proxy=http://1.1.1.1:8080
 ```
 
-* Clonamos este repositorio
+* Clonamos este repositorio  (en la raiz /)
 
 ```sh
 git clone https://github.com/kplian/instalador_framework.pxp.git
