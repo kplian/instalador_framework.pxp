@@ -13,6 +13,8 @@ def instalar_pxp():
 		proxy = ""
 			
 	run("yum -y install wget")
+	with cd('/tmp'):
+        	run('ls')
 		
 	version = run("grep -o release.. /etc/redhat-release")
 	
