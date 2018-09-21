@@ -43,9 +43,11 @@ $ sudo yum install epel-release
 # install python-pip
 $ sudo yum -y install python-pip
 ```
-```sh
+<!---
 pip install fabric paramiko==1.10  ptyprocess==0.4  fexpect PyCrypto==2.3   --NO USAR OBSOLETO
-[comment]: # (This actually is the most platform independent comment)
+-->
+```sh
+
 yum install fabric
 
 pip install fexpect
