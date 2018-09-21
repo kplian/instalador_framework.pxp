@@ -34,8 +34,7 @@ yum install gcc python-devel python-setuptools git -y
 export http_proxy=http://1.1.1.1:8080
 export https_proxy=https://1.1.1.1:8080
 ```
-* Luego instalar easy_install (para centos 7 el EPEL puede varias y tener alguna otro problema al correr  fab, por que dentro se isntala EPEL para centos 7 , hay que hacer nuevas pruebas)
-
+* Luego instalar pip
 
 ```
 # install EPEL repository first
