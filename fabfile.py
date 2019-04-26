@@ -20,10 +20,10 @@ def instalar_pxp():
 	
 	if(version == 'release 7'):
 		# postgres de  rpm de postgres 9.5# 
-		run("wget http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm")
+		run("wget http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-3.noarch.rpm")
 	else:
 		# postgres de  rpm de postgres 9.5# 
-		run("wget http://yum.postgresql.org/9.5/redhat/rhel-6-x86_64/pgdg-redhat95-9.5-2.noarch.rpm")
+		run("wget http://yum.postgresql.org/9.5/redhat/rhel-6-x86_64/pgdg-redhat95-9.5-3.noarch.rpm")
 
 # configuraicon de archivos de centos-base.repo agregando una linea #
 	s = open("/etc/yum.repos.d/CentOS-Base.repo",'a')
@@ -31,9 +31,9 @@ def instalar_pxp():
 	s.close()
 
 	if(version == 'release 7'):
-		run("rpm -Uvh --replacepkgs pgdg-centos95-9.5-2.noarch.rpm")
+		run("rpm -Uvh --replacepkgs pgdg-centos95-9.5-3.noarch.rpm")
 	else:
-		run("rpm -Uvh --replacepkgs pgdg-redhat95-9.5-2.noarch.rpm")
+		run("rpm -Uvh --replacepkgs pgdg-redhat95-9.5-3.noarch.rpm")
 	
 # instalacion de postgres y la primera corrida #
 	S_pgsql="service postgresql-9.5"
