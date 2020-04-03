@@ -26,7 +26,10 @@ sudo su -
 * Primero instalamos fabric para ejecutar el instalador ya que no viene por defecto en centos
 
 ```sh
-yum install gcc python-devel python-setuptools git -y
+sudo yum install gcc python-devel python-setuptools git -y
+
+sudo yum install python-pip -y
+
 ```
 * Si la conexion es por proxy hacer:
 
@@ -50,7 +53,7 @@ pip install fabric paramiko==1.10  ptyprocess==0.4  fexpect PyCrypto==2.3   --NO
 
 ```sh
 #install fabric
-$yum install fabric
+$sudo yum install fabric
 $pip install fexpect
 
 ```
@@ -70,8 +73,15 @@ git clone https://github.com/kplian/instalador_framework.pxp.git
 
 * Luego ejecutamos en la carpeta donde se encuentra el instalador (dentro de la carpeta que se acaba de clonar)
 
+cenntos 6 ...
 ```sh 
 fab instalar_pxp
+```
+
+
+cenntos 6 ...
+```sh 
+fab instalar_pxp_centos_7
 ```
 
 
