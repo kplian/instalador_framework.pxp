@@ -46,6 +46,7 @@ $ sudo yum install epel-release
 
 # install python-pip
 $ sudo yum -y install python-pip
+ pip install --upgrade
 ```
 <!---
 pip install fabric paramiko==1.10  ptyprocess==0.4  fexpect PyCrypto==2.3   --NO USAR OBSOLETO
@@ -78,11 +79,6 @@ cenntos 6 ...
 fab instalar_pxp
 ```
 
-
-cenntos 7 ...
-```sh 
-fab instalar_pxp_centos_7
-```
 
 
 
