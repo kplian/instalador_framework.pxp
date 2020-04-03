@@ -79,7 +79,7 @@ fab instalar_pxp
 ```
 
 
-cenntos 6 ...
+cenntos 7 ...
 ```sh 
 fab instalar_pxp_centos_7
 ```
