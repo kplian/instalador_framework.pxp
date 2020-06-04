@@ -42,7 +42,7 @@ def instalar_pxp():
         # instalacion de postgres y la primera corrida #
                 S_pgsql="service postgresql-9.5"
                 I_pgsql="postgresql95"
-                sudo("yum -y install postgresql11-server postgresql11-docs postgresql11-contrib postgresql11-plperl postgresql11-plpython postgresql11-pltcl postgresql11-test rhdb-utils gcc-objc postgresql11-devel ")
+                sudo("yum -y install centos-release-scl postgresql11-server postgresql11-docs postgresql11-contrib postgresql11-plperl postgresql11-plpython postgresql11-pltcl postgresql11-test rhdb-utils gcc-objc postgresql11-devel ")
                 if(version == 'release 7'):
                         
                         run("/usr/pgsql-11/bin/postgresql-11-setup initdb")
