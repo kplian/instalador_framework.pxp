@@ -28,7 +28,6 @@ sudo su -
 ```sh
 sudo yum install gcc python-devel python-setuptools git -y
 
-sudo yum install python-pip -y
 
 ```
 * Si la conexion es por proxy hacer:
